@@ -3,7 +3,7 @@ import React from 'react'
 export default function Home() {
   return (
     <div>
-        Home Page
+        Click on user icon on the top
     </div>
   )
 }
