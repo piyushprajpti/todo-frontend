@@ -1,0 +1,6 @@
+@import "../../index.css";
+
+.parentDiv:focus-within {
+    border: 2px solid var(--primary-blue);
+    border-left: 0;
+}

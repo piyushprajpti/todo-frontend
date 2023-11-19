@@ -1,7 +1,8 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import './inputField.css'
 
 export default function InputField(props) {
 
@@ -18,11 +19,11 @@ export default function InputField(props) {
             <div className='flex justify-center items-center px-3 border-solid border-primary-blue border-2 rounded-l-lg text-primary-blue text-lg min-w-[56px]'>
                 <FontAwesomeIcon icon={props.icon} />
             </div>
-            <div className='flex items-center p-2 border-solid bg-white border-gray-300 focus:border-primary-blue border-2 rounded-r-lg border-l-0 w-full'>
+            <div className='parentDiv flex items-center p-2 border-solid bg-white border-gray-300 border-2 rounded-r-lg border-l-0 w-full'>
                 <input
                     type={props.isPswd ? inputType : props.type}
                     placeholder={props.placeholder}
-                    className='flex-1 w-full outline-none indent-2'
+                    className='flex-1 w-full outline-none indent-2 text-gray-800'
                 />
 
                 {

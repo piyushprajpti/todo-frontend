@@ -8,7 +8,8 @@ export default function LoginPage() {
         <div className='flex flex-col w-full items-center pt-8'>
 
             <div className='flex flex-col w-[90%] md:w-[50%] lg:w-[25%] '>
-                <p className='text-3xl font-bold pb-5 text-gray-700'>Welcome Back!</p>
+                <p className='text-3xl font-bold text-gray-700'>Welcome Back!</p>
+                <p className='text-base pb-5 text-gray-400'>Login to view your saved notes. </p>
 
                 <InputField icon={faEnvelope} type={"email"} placeholder={"Email Adresss"} />
 
@@ -16,7 +17,7 @@ export default function LoginPage() {
 
                 <div className='flex justify-between mx-1'>
                     <p className='text-red-500 '></p>
-                    <p className='text-gray-500 underline hover:cursor-pointer active:text-primary-blue md:hover:text-primary-blue'>Reset Password</p>
+                    <Link className='text-gray-500 underline hover:cursor-pointer active:text-primary-blue md:hover:text-primary-blue' to={'/resetpassword'} >Reset Password</Link>
                 </div>
 
                 <p className={`font-bold text-center text-xl hover:cursor-pointer text-white px-4 py-2 bg-primary-blue rounded-lg md:hover:bg-primary-blue-hover active:bg-primary-blue-hover duration-200 mt-8`}>Log In</p>
