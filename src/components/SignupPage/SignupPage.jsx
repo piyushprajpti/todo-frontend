@@ -2,11 +2,31 @@ import React from 'react'
 import { faEnvelope, faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import InputField from '../InputField/InputField'
+import { useState } from 'react'
+import axios from 'axios'
 
 export default function SignupPage() {
 
-    const PswdVisibility = () => {
+    const [data, setData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    });
 
+    const url = "http://localhost:8080/signup";
+
+    const onSubmit = async () => {
+
+        try {
+            let result = await axios.post(url, data, {
+                headers: { "Content-Type": "application/json" }
+            })
+
+            console.log(result);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -15,15 +35,47 @@ export default function SignupPage() {
 
                 <p className='text-3xl font-bold pb-5 text-gray-700'>Create New Account.</p>
 
-                <InputField icon={faUser} type={"text"} placeholder={"Your Name"} />
+                <InputField
+                    icon={faUser}
+                    type={"text"}
+                    placeholder={"Your Name"}
+                    value={data.name}
+                    onChange={(e) => setData({ ...data, name: e.target.value })}
+                />
 
-                <InputField icon={faEnvelope} type={"email"} placeholder={"Email Adresss"} />
+                <InputField
+                    icon={faEnvelope}
+                    type={"email"}
+                    placeholder={"Email Adresss"}
+                    value={data.email}
+                    onChange={(e) => setData({ ...data, email: e.target.value })}
 
-                <InputField icon={faLock} type={"password"} placeholder={"Password"} isPswd />
+                />
 
-                <InputField icon={faLock} type={"password"} placeholder={"Confirm Password"} isPswd />
-                
-                <p className={`font-bold text-center text-xl hover:cursor-pointer text-white px-4 py-2 bg-primary-blue rounded-lg md:hover:bg-primary-blue-hover active:bg-primary-blue-hover duration-200 mt-8`}>Sign Up</p>
+                <InputField
+                    icon={faLock}
+                    type={"password"}
+                    placeholder={"Password"}
+                    value={data.password}
+                    onChange={(e) => setData({ ...data, password: e.target.value })}
+                    isPswd
+                />
+
+                <InputField
+                    icon={faLock}
+                    type={"password"}
+                    placeholder={"Confirm Password"}
+                    value={data.confirmPassword}
+                    onChange={(e) => setData({ ...data, confirmPassword: e.target.value })}
+                    isPswd
+                />
+
+                <p
+                    className={`font-bold text-center text-xl hover:cursor-pointer text-white px-4 py-2 bg-primary-blue rounded-lg md:hover:bg-primary-blue-hover active:bg-primary-blue-hover duration-200 mt-8`}
+                    onClick={() => onSubmit()}
+                >
+                    Sign Up
+                </p>
 
             </div>
 

@@ -19,3 +19,7 @@
     --primary-blue: #2563eb;
     --primary-blue-hover: #457aed;
 } 
+
+::-ms-reveal {
+    display: none;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons'
 import { useState } from 'react'
-import './inputField.css'
+import css from './inputField.module.css'
 
 export default function InputField(props) {
 
@@ -19,16 +19,18 @@ export default function InputField(props) {
             <div className='flex justify-center items-center px-3 border-solid border-primary-blue border-2 rounded-l-lg text-primary-blue text-lg min-w-[56px]'>
                 <FontAwesomeIcon icon={props.icon} />
             </div>
-            <div className='parentDiv flex items-center p-2 border-solid bg-white border-gray-300 border-2 rounded-r-lg border-l-0 w-full'>
+            <div className={`${css.parentDiv} flex items-center p-2 border-solid bg-white border-gray-300 border-2 rounded-r-lg border-l-0 w-full`}>
                 <input
                     type={props.isPswd ? inputType : props.type}
                     placeholder={props.placeholder}
-                    className='flex-1 w-full outline-none indent-2 text-gray-800'
+                    className={`${css.input} flex-1 w-full outline-none indent-2 text-gray-800`}
+                    value={props.value}
+                    onChange={(e) => props.onChange(e)}
                 />
 
                 {
                     props.isPswd &&
-                    <FontAwesomeIcon icon={shouldShowPassword ? faEyeSlash : faEye} className=' text-gray-500 text-lg cursor-pointer mx-1' onClick={togglePasswordVisibility} />
+                    <FontAwesomeIcon icon={shouldShowPassword ? faEye : faEyeSlash} className=' text-gray-500 text-lg cursor-pointer mx-1' onClick={togglePasswordVisibility} />
                 }
             </div>
         </div>

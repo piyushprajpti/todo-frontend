@@ -13,7 +13,7 @@ export default function Container() {
     const [shouldShowAddNoteScreen, setShouldShowAddNoteScreen] = useState(false);
 
     return (
-        <div className='w-screen h-screen'>
+        <div className='w-screen h-full'>
             {
                 shouldShowAddNoteScreen && <AddNoteScreen onBackClick={() => setShouldShowAddNoteScreen(false)} />
             }

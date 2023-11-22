@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import InputField from '../InputField/InputField'
 
 export default function LoginPage() {
+
+    const [data, setData] = useState({
+        email: "",
+        password: ""
+    })
+
     return (
         <div className='flex flex-col w-full items-center pt-8'>
 
@@ -11,9 +17,22 @@ export default function LoginPage() {
                 <p className='text-3xl font-bold text-gray-700'>Welcome Back!</p>
                 <p className='text-base pb-5 text-gray-400'>Login to view your saved notes. </p>
 
-                <InputField icon={faEnvelope} type={"email"} placeholder={"Email Adresss"} />
+                <InputField
+                    icon={faEnvelope}
+                    type={"email"}
+                    placeholder={"Email Adresss"}
+                    value={data.email}
+                    onChange={(e) => setData({...data, email: e.target.value})}
+                />
 
-                <InputField icon={faLock} type={"password"} placeholder={"Password"} isPswd />
+                <InputField
+                    icon={faLock}
+                    type={"password"}
+                    placeholder={"Password"}
+                    value={data.password}
+                    onChange={(e) => setData({...data, password: e.target.value})}
+                    isPswd
+                />
 
                 <div className='flex justify-between mx-1'>
                     <p className='text-red-500 '></p>
