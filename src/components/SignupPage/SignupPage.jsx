@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { faEnvelope, faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import InputField from '../InputField/InputField'
-import { useState } from 'react'
 import axios from 'axios'
 
 export default function SignupPage() {
+
+    const [errorMsg, setErrorMsg] = useState("");
+    const [errorColor, setErrorColor] = useState("red");
 
     const [data, setData] = useState({
         name: "",
@@ -22,8 +24,23 @@ export default function SignupPage() {
             let result = await axios.post(url, data, {
                 headers: { "Content-Type": "application/json" }
             })
+            if (data.name === "" || data.email === "" || data.password === "" || data.confirmPassword === "") {
+                setErrorColor("red");
+                setErrorMsg("Fields can't be empty");
+            }
+            else if (data.password !== data.confirmPassword) {
+                setErrorColor("red");
+                setErrorMsg("Password mismatch.")
+            }
+            else if (result.data === "user already exist") {
+                setErrorColor("red");
+                setErrorMsg("User already exist. Please login to continue")
+            }
+            else {
+                setErrorColor("green");
+                setErrorMsg("Account created successfully. Please login to continue.");
+            }
 
-            console.log(result);
         } catch (error) {
             console.log(error);
         }
@@ -70,12 +87,16 @@ export default function SignupPage() {
                     isPswd
                 />
 
-                <p
-                    className={`font-bold text-center text-xl hover:cursor-pointer text-white px-4 py-2 bg-primary-blue rounded-lg md:hover:bg-primary-blue-hover active:bg-primary-blue-hover duration-200 mt-8`}
+                <p className={`text-${errorColor}-500 text-[15px] h-5 ml-1`}>
+                    {errorMsg}
+                </p>
+
+                <Link
+                    className={`font-bold text-center text-xl hover:cursor-pointer text-white px-4 py-2 bg-primary-blue rounded-lg md:hover:bg-primary-blue-hover active:bg-primary-blue-hover duration-200 mt-5`}
                     onClick={() => onSubmit()}
                 >
                     Sign Up
-                </p>
+                </Link>
 
             </div>
 

@@ -13,7 +13,7 @@ export default function Header() {
 
             <Link to={"/login"}>
                 <FontAwesomeIcon icon={faUser} className='md:hidden hover:cursor-pointer text-2xl active:bg-gray-200 px-3 py-2.5 rounded-full' />
-            </Link>
+            </Link> 
 
             <div className='hidden md:flex items-center '>
                 <Link
