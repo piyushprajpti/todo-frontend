@@ -7,6 +7,7 @@ import axios from 'axios'
 export default function SignupPage() {
 
     const [errorMsg, setErrorMsg] = useState("");
+    const [errorColor, setErrorColor] = useState("text-red-500");
 
     const [data, setData] = useState({
         name: "",
@@ -28,9 +29,19 @@ export default function SignupPage() {
             let result = await axios.post(url, data, {
                 headers: { "Content-Type": "application/json" }
             })
-
+            setErrorColor("text-green-500");
+            setErrorMsg(result.data);
+            setData({
+                email: "",
+                otp: "",
+                password: "",
+                confirmPassword: ""
+            })
         } catch (error) {
-            setErrorMsg(error.response.data);
+            setErrorColor("text-red-500");
+            if (error.code === "ERR_NETWORK") setErrorMsg("Server unreachable");
+            else if (error.response) setErrorMsg(error.response.data)
+            else setErrorMsg(error.message);
         }
     }
 
@@ -75,12 +86,12 @@ export default function SignupPage() {
                     isPswd
                 />
 
-                <p className={`text-red-500 text-[15px] h-5 ml-1`}>
+                <p className={`${errorColor} text-[15px] h-5 ml-1`}>
                     {errorMsg}
                 </p>
 
                 <Link
-                    className={`font-bold text-center text-xl hover:cursor-pointer text-white px-4 py-2 bg-primary-blue rounded-lg md:hover:bg-primary-blue-hover active:bg-primary-blue-hover duration-200 mt-5`}
+                    className={`font-bold text-center text-xl hover:cursor-pointer text-white px-4 py-2 bg-primary-blue rounded-lg md:hover:bg-primary-blue-hover active:bg-primary-blue-hover duration-200 mt-6`}
                     onClick={() => onSubmit()}
                 >
                     Sign Up

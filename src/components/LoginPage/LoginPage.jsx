@@ -7,6 +7,7 @@ import axios from 'axios'
 export default function LoginPage() {
 
     const [errorMsg, setErrorMsg] = useState("");
+    const [errorColor, setErrorColor] = useState("text-red-500");
 
     const [data, setData] = useState({
         email: "",
@@ -26,8 +27,11 @@ export default function LoginPage() {
             let result = await axios.post(url, data, {
                 headers: { "Content-Type": "application/json" }
             })
+            setErrorColor("text-green-500");
+            setErrorMsg(result.data);
 
         } catch (error) {
+            setErrorColor("text-red-500");
             if (error.code === "ERR_NETWORK") setErrorMsg("Server unreachable");
             else if (error.response) setErrorMsg(error.response.data)
             else setErrorMsg(error.message);
@@ -63,7 +67,7 @@ export default function LoginPage() {
                     <Link className='text-gray-500 underline hover:cursor-pointer active:text-primary-blue md:hover:text-primary-blue' to={'/resetpassword'} >Reset Password</Link>
                 </div>
 
-                <p className='text-[#ff3333] text-[15px] h-5 ml-1'>
+                <p className={`${errorColor} text-[15px] h-5 ml-1`}>
                     {errorMsg}
                 </p>
 
