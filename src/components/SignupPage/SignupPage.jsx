@@ -7,7 +7,6 @@ import axios from 'axios'
 export default function SignupPage() {
 
     const [errorMsg, setErrorMsg] = useState("");
-    const [errorColor, setErrorColor] = useState("red");
 
     const [data, setData] = useState({
         name: "",
@@ -16,33 +15,22 @@ export default function SignupPage() {
         confirmPassword: ""
     });
 
-    const url = "http://localhost:8080/signup";
+    const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
+    const global = "https://deep-tailor.el.r.appspot.com";
+
+    let url = `${local}/signup`;
 
     const onSubmit = async () => {
+
+        setErrorMsg("");
 
         try {
             let result = await axios.post(url, data, {
                 headers: { "Content-Type": "application/json" }
             })
-            if (data.name === "" || data.email === "" || data.password === "" || data.confirmPassword === "") {
-                setErrorColor("red");
-                setErrorMsg("Fields can't be empty");
-            }
-            else if (data.password !== data.confirmPassword) {
-                setErrorColor("red");
-                setErrorMsg("Password mismatch.")
-            }
-            else if (result.data === "user already exist") {
-                setErrorColor("red");
-                setErrorMsg("User already exist. Please login to continue")
-            }
-            else {
-                setErrorColor("green");
-                setErrorMsg("Account created successfully. Please login to continue.");
-            }
 
         } catch (error) {
-            console.log(error);
+            setErrorMsg(error.response.data);
         }
     }
 
@@ -87,7 +75,7 @@ export default function SignupPage() {
                     isPswd
                 />
 
-                <p className={`text-${errorColor}-500 text-[15px] h-5 ml-1`}>
+                <p className={`text-red-500 text-[15px] h-5 ml-1`}>
                     {errorMsg}
                 </p>
 

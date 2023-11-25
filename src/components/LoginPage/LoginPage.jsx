@@ -13,26 +13,24 @@ export default function LoginPage() {
         password: ""
     });
 
-    const url = "http://localhost:8080/login";
+    const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
+    const global = "https://deep-tailor.el.r.appspot.com";
+
+    let url = `${local}/login`;
 
     const onSubmit = async () => {
+
+        setErrorMsg("");
+
         try {
             let result = await axios.post(url, data, {
                 headers: { "Content-Type": "application/json" }
             })
 
-            if (data.email === "" || data.password === "") {
-                setErrorMsg("Fields can't be empty.")
-            }
-            else if (result.data === "invalid input") {
-                setErrorMsg("Invalid Credentials. Try again with correct details.");
-            }
-            else {
-                setErrorMsg("");
-            }
-
         } catch (error) {
-            console.log(error);
+            if (error.code === "ERR_NETWORK") setErrorMsg("Server unreachable");
+            else if (error.response) setErrorMsg(error.response.data)
+            else setErrorMsg(error.message);
         }
     }
 
