@@ -6,7 +6,7 @@ export default function Home(props) {
     return (
        <>
          <div className='flex w-full py-5 flex-col'>
-            <div className='flex flex-wrap mx-3.5 md:justify-start justify-center'>
+            <div className='flex flex-wrap mx-3 md:justify-start justify-center'>
 
                 <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf s"} />
                 <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf s"} />
