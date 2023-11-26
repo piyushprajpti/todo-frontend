@@ -2,18 +2,40 @@ import React, { useState } from 'react'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import InputField from '../InputField/InputField'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 export default function ResetPassword() {
 
     const [email, setEmail] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
+    const [errorColor, setErrorColor] = useState("");
 
     const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
     const global = "https://deep-tailor.el.r.appspot.com";
 
     let url = `${local}/resetpassword`;
-
     const onSubmit = async () => {
-        
+
+        setErrorMsg("");
+
+        try {
+            if (email.trim() === "" || email.indexOf("@") === -1) {
+                throw {message: "Invalid email address"};
+            }
+
+            let result = await axios.post(url, { email }, {
+                headers: { "Content-Type": "application/json" }
+            })
+            setErrorColor("text-green-500");
+            setErrorMsg(result.data);
+
+        } catch (error) {
+            setErrorColor("text-red-500");
+            if (error.code === "ERR_NETWORK") setErrorMsg("Server unreachable");
+            else if (error.response) setErrorMsg(error.response.data)
+            else setErrorMsg(error.message);
+        }
+        setEmail("");
     }
 
     return (
@@ -30,6 +52,10 @@ export default function ResetPassword() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
+
+                <p className={`${errorColor} text-[15px] h-5 ml-1`}>
+                    {errorMsg}
+                </p>
 
                 <Link
                     className={`font-bold text-center text-xl hover:cursor-pointer text-white px-4 py-2 bg-primary-blue rounded-lg md:hover:bg-primary-blue-hover active:bg-primary-blue-hover duration-200 mt-6`}

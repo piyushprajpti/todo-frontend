@@ -32,8 +32,8 @@ export default function SignupPage() {
             setErrorColor("text-green-500");
             setErrorMsg(result.data);
             setData({
+                name: "",
                 email: "",
-                otp: "",
                 password: "",
                 confirmPassword: ""
             })
