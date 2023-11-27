@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NoteStructure from './NoteStructure/NoteStructure'
 import AddNoteButton from '../AddNote/AddNoteButton'
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home(props) {
+
+    const navigate = useNavigate();
+    
+    const isUseridAvailable = Cookies.get("userid");
+
+    useEffect(()=>{
+        isUseridAvailable ? console.log(isUseridAvailable) : navigate("/login");
+    },[]);
+
     return (
        <>
          <div className='flex w-full py-5 flex-col'>

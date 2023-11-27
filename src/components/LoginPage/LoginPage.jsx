@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import InputField from '../InputField/InputField'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 export default function LoginPage() {
 
     const [errorMsg, setErrorMsg] = useState("");
     const [errorColor, setErrorColor] = useState("text-red-500");
 
+    const navigate = useNavigate();
+    
     const [data, setData] = useState({
         email: "",
         password: ""
@@ -17,24 +20,30 @@ export default function LoginPage() {
     const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
     const global = "https://deep-tailor.el.r.appspot.com";
 
-    let url = `${local}/login`;
+    let url = `${global}/login`;
 
     const onSubmit = async () => {
 
         setErrorMsg("");
-
         try {
+
             let result = await axios.post(url, data, {
                 headers: { "Content-Type": "application/json" }
             })
-            setErrorColor("text-green-500");
-            setErrorMsg(result.data);
 
+            Cookies.set("userid", result.data._id);
+            setErrorColor("text-green-500");
+            setErrorMsg("Login successfull.");
+
+            navigate("/");
         } catch (error) {
+
             setErrorColor("text-red-500");
+
             if (error.code === "ERR_NETWORK") setErrorMsg("Server unreachable");
             else if (error.response) setErrorMsg(error.response.data)
             else setErrorMsg(error.message);
+            console.log(error.message)
         }
     }
 

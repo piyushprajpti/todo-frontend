@@ -8,6 +8,7 @@ import ResetPassword from './components/ResetPassword/ResetPassword'
 import AddNoteScreen from './components/AddNote/AddNoteScreen'
 import { useState } from 'react'
 import CreatePassword from './components/ResetPassword/CreatePassword'
+import ProfilePage from './components/ProfilePage/ProfilePage'
 
 export default function Container() {
 
@@ -26,6 +27,7 @@ export default function Container() {
                 <Route path={'/signup'} element={<SignupPage />} />
                 <Route path={'/resetpassword'} element={<ResetPassword />} />
                 <Route path={'/createpassword'} element={<CreatePassword />} />
+                <Route path={'/profilepage'} element={<ProfilePage />} />
 
             </Routes>
         </div>

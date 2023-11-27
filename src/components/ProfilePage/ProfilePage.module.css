@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-top: 32px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+
+    @media (max-width: 1024px) {
+        width: 50%;
+    }
+
+    @media (max-width: 768px) {
+        width: 90%;
+    }
+}
+
+.fieldContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.linksContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.links {
+    text-decoration: underline;
+    
+}

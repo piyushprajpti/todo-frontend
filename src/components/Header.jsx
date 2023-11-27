@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 export default function Header() {
+
     return (
         <div className='w-full h-16 shadow-[0_0_3px_0px_#0000003d] flex items-center justify-between px-6 md:px-12 '>
 
@@ -11,11 +13,11 @@ export default function Header() {
                 ToDo
             </Link>
 
-            <Link to={"/login"}>
-                <FontAwesomeIcon icon={faUser} className='md:hidden hover:cursor-pointer text-2xl active:bg-gray-200 px-3 py-2.5 rounded-full' />
-            </Link> 
+            <Link to={'/profilepage'}>
+                <FontAwesomeIcon icon={faUser} className='hover:cursor-pointer text-2xl active:bg-gray-200 px-3 py-2.5 rounded-full' />
+            </Link>
 
-            <div className='hidden md:flex items-center '>
+            {/* <div className='hidden md:flex items-center '>
                 <Link
                     className={`font-bold mr-5 hover:cursor-pointer hover:text-primary-blue text-gray-700 `}
                     to={"/login"}
@@ -28,7 +30,7 @@ export default function Header() {
                 >
                     Sign Up
                 </Link>
-            </div>
+            </div> */}
 
         </div>
     )

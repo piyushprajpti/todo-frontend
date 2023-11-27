@@ -13,29 +13,33 @@ export default function ResetPassword() {
     const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
     const global = "https://deep-tailor.el.r.appspot.com";
 
-    let url = `${local}/resetpassword`;
+    let url = `${global}/resetpassword`;
+
     const onSubmit = async () => {
 
         setErrorMsg("");
 
         try {
-            if (email.trim() === "" || email.indexOf("@") === -1) {
-                throw {message: "Invalid email address"};
-            }
-
             let result = await axios.post(url, { email }, {
                 headers: { "Content-Type": "application/json" }
-            })
+            });
+
             setErrorColor("text-green-500");
             setErrorMsg(result.data);
+            console.log(result.data);
 
-        } catch (error) {
+        }
+        catch (error) {
+            console.log(error)
+
             setErrorColor("text-red-500");
+
             if (error.code === "ERR_NETWORK") setErrorMsg("Server unreachable");
             else if (error.response) setErrorMsg(error.response.data)
             else setErrorMsg(error.message);
         }
-        setEmail("");
+
+        // setEmail("");
     }
 
     return (
