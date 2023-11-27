@@ -25,22 +25,19 @@ export default function ResetPassword() {
             });
 
             setErrorColor("text-green-500");
-            setErrorMsg(result.data);
-            console.log(result.data);
+            (result.data.code === 1) ? setErrorMsg("Email sent successfully. Please check your inbox.") : setErrorMsg("");
 
         }
         catch (error) {
-            console.log(error)
-
             setErrorColor("text-red-500");
-
+            
             if (error.code === "ERR_NETWORK") setErrorMsg("Server unreachable");
             else if (error.response) setErrorMsg(error.response.data)
             else setErrorMsg(error.message);
-        }
-
-        // setEmail("");
+        
+        setEmail("");
     }
+}         
 
     return (
         <div className='flex flex-col w-full items-center pt-8'>

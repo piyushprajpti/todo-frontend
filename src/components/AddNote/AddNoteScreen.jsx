@@ -19,9 +19,9 @@ export default function AddNoteScreen(props) {
     const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
     const global = "https://deep-tailor.el.r.appspot.com";
 
-    let url = `${local}/addnote`;
+    let url = `${global}/addnote`;
 
-    const onSubmit = async () => {
+    const onSave = async () => {
         try {
             let result = await axios.post(url, data, {
                 headers: { "Content-Type": "application/json" }
@@ -49,7 +49,7 @@ export default function AddNoteScreen(props) {
                         </Link>
                         <Link
                             className={`${css.saveText} text-xl ml-6 mr-2`}
-                            onClick={() => onSubmit()}
+                            onClick={() => onSave()}
                         >
                             Save
                         </Link>
