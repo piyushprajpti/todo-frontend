@@ -1,50 +1,60 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import NoteStructure from './NoteStructure/NoteStructure'
 import AddNoteButton from '../AddNote/AddNoteButton'
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Home(props) {
 
     const navigate = useNavigate();
-    
-    const isUseridAvailable = Cookies.get("userid");
+    const [notes, setNotes] = useState([]);
+    const userid = localStorage.getItem("userid");
 
-    useEffect(()=>{
-        isUseridAvailable ? console.log(isUseridAvailable) : navigate("/login");
-    },[]);
+    const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
+    const global = "https://deep-tailor.el.r.appspot.com";
+
+    let url = `${global}/`;
+
+    useEffect(() => {
+        if (!userid) navigate("/login");
+
+        const fetchNotes = async () => {
+
+            let result;
+
+            try {
+                result = await axios.post(url, { userid }, {
+                    headers: { "Content-Type": "application/json" }
+                })
+
+                setNotes(result.data);
+                console.log(result.data);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchNotes();
+    }, [navigate]);
+
 
     return (
-       <>
-         <div className='flex w-full py-5 flex-col'>
-            <div className='flex flex-wrap mx-3 md:justify-start justify-center'>
+        <>
+            <div className='flex w-full py-5 flex-col'>
+                {notes.length === 0 ? (
+                    <p className='flex flex-wrap mx-3 justify-center text-xl text-gray-400 text-center'>
+                        No notes available. Add a new note using the <span className='text-primary-blue mx-2 font-bold'> + </span> button below.
+                    </p>
 
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf s"} />
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf s"} />
-                <NoteStructure title={"Today's tasks"} description={""} />
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf s"} />
-                <NoteStructure title={""} description={"loremsfsdbfsdjkhf s"} />
-
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkdf hgfsd hasdf asdfgasdf sdf s"} />
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkdf hgfsd hasdf asdfgasdf sdf s"} />
-
-                <NoteStructure title={"Today's tasks"} description={"loremsf dfg dgd d df s"} />
-                <NoteStructure title={"Today's tasks"} description={"loremsf dfg dgd d df s"} />
-
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf sdus jkfhsdk sdf sdhgfsd hsdf hgfsd hasdf asdfgasdf sdf s"} />
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf sdus jkfhsdk sdf sdhgfsd hsdf hgfsd hasdf asdfgasdf sdf s"} />
-
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf sdus jkfhsdk sdf sdhgfsd hsdf hgfsd hasdf asdfgasdf sdf s"} />
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf sdus jkfhsdk sdf sdhgfsd hsdf hgfsd hasdf asdfgasdf sdf s"} />
-
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf sdus jkfhsdk sdf sdhgfsd hsdf hgfsd hasdf asdfgasdf sdf s"} />
-                <NoteStructure title={"Today's tasks"} description={"loremsfsdbfsdjkhf sdus jkfhsdk sdf sdhgfsd hsdf hgfsd hasdf asdfgasdf sdf s"} />
-
-
+                ) : (
+                    <div className='flex flex-wrap mx-3 md:justify-start justify-center'>
+                        {notes.map((note) => (
+                            <NoteStructure key={note._id} title={note.title} description={note.description} />
+                        ))}
+                    </div>
+                )}
             </div>
-        </div>
 
-        <AddNoteButton onClick={() => props.setShouldShowAddNoteScreen(true)} />
-       </>
+            <AddNoteButton onClick={() => props.setShouldShowAddNoteScreen(true)} />
+        </>
     )
 }

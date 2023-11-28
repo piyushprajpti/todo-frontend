@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 
 export default function AddNoteScreen(props) {
 
-    const userid = Cookies.get("userid");
+    const userid = localStorage.getItem("userid");
 
     const [data, setData] = useState({
         userid: userid,

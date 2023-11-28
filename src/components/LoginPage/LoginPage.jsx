@@ -31,7 +31,7 @@ export default function LoginPage() {
                 headers: { "Content-Type": "application/json" }
             })
 
-            Cookies.set("userid", result.data._id);
+            localStorage.setItem("userid", result.data._id);
             setErrorColor("text-green-500");
             setErrorMsg("Login successfull.");
 

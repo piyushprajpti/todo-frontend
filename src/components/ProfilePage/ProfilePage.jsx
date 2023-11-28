@@ -14,7 +14,7 @@ export default function ProfilePage() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
 
-    const userid = Cookies.get("userid");
+    const userid = localStorage.getItem("userid");
 
     useEffect(() => {
         if (!userid) navigate("/login");
@@ -44,7 +44,7 @@ export default function ProfilePage() {
     getData();
 
     const onLogout = async () => {
-        Cookies.remove("userid");
+        localStorage.removeItem("userid");
 
     }
 
