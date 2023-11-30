@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import NoteStructure from './NoteStructure/NoteStructure'
 import AddNoteButton from '../AddNote/AddNoteButton'
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { address } from '../url'
 
 export default function Home(props) {
 
@@ -10,10 +11,7 @@ export default function Home(props) {
     const [notes, setNotes] = useState([]);
     const userid = localStorage.getItem("userid");
 
-    const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
-    const global = "https://deep-tailor.el.r.appspot.com";
-
-    let url = `${global}/`;
+    let url = `${address}/`;
 
     useEffect(() => {
         if (!userid) navigate("/login");
@@ -48,13 +46,18 @@ export default function Home(props) {
                 ) : (
                     <div className='flex flex-wrap mx-3 md:justify-start justify-center'>
                         {notes.map((note) => (
-                            <NoteStructure key={note._id} title={note.title} description={note.description} />
+                            <NoteStructure
+                                key={note._id}
+                                title={note.title} 
+                                description={note.description}
+                                onClick={() => props.setShouldShowAddNoteScreen(note._id, note.title, note.description)}
+                            />
                         ))}
                     </div>
                 )}
             </div>
 
-            <AddNoteButton onClick={() => props.setShouldShowAddNoteScreen(true)} />
+            <AddNoteButton onClick={() => props.setShouldShowAddNoteScreen("", "", "")} />
         </>
     )
 }

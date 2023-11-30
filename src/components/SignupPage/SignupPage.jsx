@@ -3,7 +3,8 @@ import { faEnvelope, faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import InputField from '../InputField/InputField'
 import axios from 'axios'
-import Cookies from 'js-cookie'
+import {address} from '../url'
+
 
 export default function SignupPage() {
 
@@ -19,10 +20,7 @@ export default function SignupPage() {
         confirmPassword: ""
     });
 
-    const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
-    const global = "https://deep-tailor.el.r.appspot.com";
-
-    let url = `${global}/signup`;
+    let url = `${address}/signup`;
 
     const onSubmit = async () => {
 

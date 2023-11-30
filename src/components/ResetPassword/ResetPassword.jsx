@@ -3,6 +3,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import InputField from '../InputField/InputField'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import {address} from '../url'
 
 export default function ResetPassword() {
 
@@ -10,10 +11,7 @@ export default function ResetPassword() {
     const [errorMsg, setErrorMsg] = useState("");
     const [errorColor, setErrorColor] = useState("");
 
-    const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
-    const global = "https://deep-tailor.el.r.appspot.com";
-
-    let url = `${global}/resetpassword`;
+    let url = `${address}/resetpassword`;
 
     const onSubmit = async () => {
 

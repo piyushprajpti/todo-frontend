@@ -27,7 +27,7 @@
 
 .container:hover {
     border-color: hsl(221, 83%, 60%);
-    box-shadow: 0 0 20px 0 #00000023;
+    box-shadow: 0 0 20px 0 #00000033;
 }
 
 .title {

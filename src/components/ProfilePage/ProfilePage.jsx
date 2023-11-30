@@ -3,9 +3,9 @@ import css from "./ProfilePage.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import axios from 'axios'
 import { useState } from 'react'
+import {address} from '../url'
 
 export default function ProfilePage() {
 
@@ -20,10 +20,7 @@ export default function ProfilePage() {
         if (!userid) navigate("/login");
     }, [userid])
 
-    const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
-    const global = "https://deep-tailor.el.r.appspot.com";
-
-    let url = `${global}/profilepage`;
+    let url = `${address}/profilepage`;
 
     const getData = async () => {
         let result;

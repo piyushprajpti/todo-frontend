@@ -13,16 +13,28 @@ import ProfilePage from './components/ProfilePage/ProfilePage'
 export default function Container() {
 
     const [shouldShowAddNoteScreen, setShouldShowAddNoteScreen] = useState(false);
+    const [noteDetails, setNoteDetails] = useState({ noteid: "", title: "", description: "" })
 
     return (
         <div className='w-screen h-full'>
             {
-                shouldShowAddNoteScreen && <AddNoteScreen onBackClick={() => setShouldShowAddNoteScreen(false)} />
+                shouldShowAddNoteScreen && <AddNoteScreen
+                    onBackClick={() => setShouldShowAddNoteScreen(false)}
+                    noteid={noteDetails.noteid}
+                    title={noteDetails.title}
+                    description={noteDetails.description}
+                />
             }
             <Header />
 
             <Routes>
-                <Route path={'/'} element={<Home setShouldShowAddNoteScreen={setShouldShowAddNoteScreen} />} />
+                <Route path={'/'} element={<Home
+                    setShouldShowAddNoteScreen={(noteid, title, description) => {
+                        setNoteDetails({ noteid, title, description })
+                        setShouldShowAddNoteScreen(true)
+                    }}
+                />}
+                />
                 <Route path={'/login'} element={<LoginPage />} />
                 <Route path={'/signup'} element={<SignupPage />} />
                 <Route path={'/resetpassword'} element={<ResetPassword />} />

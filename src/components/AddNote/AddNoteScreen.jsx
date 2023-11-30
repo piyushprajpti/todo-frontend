@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import {address} from '../url'
+
 
 export default function AddNoteScreen(props) {
 
@@ -12,24 +13,39 @@ export default function AddNoteScreen(props) {
 
     const [data, setData] = useState({
         userid: userid,
-        title: "",
-        description: ""
+        noteid: props.noteid,
+        title: props.title,
+        description: props.description
     });
 
-    const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
-    const global = "https://deep-tailor.el.r.appspot.com";
+    let saveurl = `${address}/addnote`;
+    let deleteurl = `${address}/deletenote`;
 
-    let url = `${global}/addnote`;
+    const onDelete = async () => {
+        try {
+            let result = await axios.post(deleteurl, data, {
+                headers: { "Content-Type": "application/json" }
+            })
+
+            console.log(result);
+        } catch (error) {
+            console.log(error);
+        }
+
+        window.location.reload();
+    }
 
     const onSave = async () => {
         try {
-            let result = await axios.post(url, data, {
+            let result = await axios.post(saveurl, data, {
                 headers: { "Content-Type": "application/json" }
             })
-            console.log(result)
+            console.log(result);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
+
+        window.location.reload();
     }
 
     return (
@@ -44,7 +60,7 @@ export default function AddNoteScreen(props) {
                     </Link>
 
                     <div className='flex items-center'>
-                        <Link>
+                        <Link onClick={() => onDelete()}>
                             <FontAwesomeIcon icon={faTrash} className={`${css.deleteIcon} text-xl `} />
                         </Link>
                         <Link
