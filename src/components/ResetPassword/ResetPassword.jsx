@@ -23,15 +23,12 @@ export default function ResetPassword() {
             });
 
             setErrorColor("text-green-500");
-            (result.data.code === 1) ? setErrorMsg("Email sent successfully. Please check your inbox.") : setErrorMsg("");
+            setErrorMsg(result.data)
 
         }
         catch (error) {
             setErrorColor("text-red-500");
-            
-            if (error.code === "ERR_NETWORK") setErrorMsg("Server unreachable");
-            else if (error.response) setErrorMsg(error.response.data)
-            else setErrorMsg(error.message);
+            setErrorMsg(error.message)
         
         setEmail("");
     }
