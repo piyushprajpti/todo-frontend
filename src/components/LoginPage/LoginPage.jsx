@@ -68,12 +68,11 @@ export default function LoginPage() {
                     isPswd
                 />
 
-                <div className='flex justify-between mx-1'>
-                    <p className='text-red-500 '></p>
+                <div className='flex justify-end mx-1'>
                     <Link className='text-gray-500 underline hover:cursor-pointer active:text-primary-blue md:hover:text-primary-blue' to={'/resetpassword'} >Reset Password</Link>
                 </div>
 
-                <p className={`${errorColor} text-[15px] h-5 ml-1`}>
+                <p className={`${errorColor} text-[15px] h-5 ml-1 `}>
                     {errorMsg}
                 </p>
 
