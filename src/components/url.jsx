@@ -1,4 +1,4 @@
-const global = "https://deep-tailor.el.r.appspot.com";
+const global = "https://todo-all.el.r.appspot.com";
 const local = "https://hedgehog-wondrous-airedale.ngrok-free.app";
 
-export const address = local;
+export const address = global;

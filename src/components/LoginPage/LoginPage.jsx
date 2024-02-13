@@ -38,7 +38,7 @@ export default function LoginPage() {
             setErrorColor("text-red-500");
 
             if (error.code === "ERR_NETWORK") setErrorMsg("Server unreachable");
-            else if (error.response) setErrorMsg(error.response.data)
+            else if (error.response) setErrorMsg(error.response.data.message)
             else setErrorMsg(error.message);
             console.log(error.message)
         }
