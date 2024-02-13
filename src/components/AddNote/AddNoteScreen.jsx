@@ -27,7 +27,7 @@ export default function AddNoteScreen(props) {
                 headers: { "Content-Type": "application/json" }
             })
 
-            console.log(result);
+            // console.log(result);
         } catch (error) {
             console.log(error);
         }
@@ -40,12 +40,12 @@ export default function AddNoteScreen(props) {
             let result = await axios.post(saveurl, data, {
                 headers: { "Content-Type": "application/json" }
             })
-            console.log(result);
+            // console.log(result);
         } catch (error) {
             console.log(error);
         }
 
-        window.location.reload();
+        // window.location.reload();
     }
 
     return (

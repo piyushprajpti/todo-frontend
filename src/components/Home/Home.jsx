@@ -26,7 +26,7 @@ export default function Home(props) {
                 })
 
                 setNotes(result.data);
-                console.log(result.data);
+                // console.log(result.data);
             } catch (error) {
                 console.log(error)
             }
