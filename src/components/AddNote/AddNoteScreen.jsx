@@ -45,7 +45,7 @@ export default function AddNoteScreen(props) {
             console.log(error);
         }
 
-        // window.location.reload();
+        window.location.reload();
     }
 
     return (
