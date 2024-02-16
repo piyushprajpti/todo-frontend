@@ -138,7 +138,7 @@ export default function ResetPassword() {
                 return (
                     <div className='flex flex-col w-[90%] md:w-[50%] lg:w-[25%] '>
                         <p className='text-3xl font-bold text-gray-700'>Create New Password</p>
-                        <p className='text-base pb-5 text-gray-400'>Enter the OTP to verify your account. </p>
+                        <p className='text-base pb-5 text-gray-400'>Enter new password for your account. </p>
 
                         <InputField
                             icon={faLock}
