@@ -39,7 +39,6 @@ export default function Container() {
                 <Route path={'/login'} element={<LoginPage />} />
                 <Route path={'/signup'} element={<SignupPage />} />
                 <Route path={'/resetpassword'} element={<ResetPassword />} />
-                <Route path={'/createpassword'} element={<CreatePassword />} />
                 <Route path={'/profilepage'} element={<ProfilePage />} />
 
             </Routes>
