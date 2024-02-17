@@ -25,8 +25,9 @@ export default function ResetPassword() {
             let result = await axios.post(`${address}/resetpassword`, { email }, {
                 headers: { "Content-Type": "application/json" }
             });
+            console.log(result)
             setErrorColor("text-green-500");
-            setErrorMsg(result.data)
+            setErrorMsg(result.data.response)
             setTimeout(() => {
                 setErrorMsg("")
             }, 3000);
@@ -47,7 +48,7 @@ export default function ResetPassword() {
                 headers: { "Content-Type": "application/json" }
             });
 
-            if (result.data === "OTP verification successfull") {
+            if (result.data.response === "OTP verification successfull") {
                 setRenderStep(3)
             }
 
@@ -66,7 +67,7 @@ export default function ResetPassword() {
             });
 
             setErrorColor("text-green-500")
-            setErrorMsg(result.data)
+            setErrorMsg(result.data.response)
         } catch (error) {
             setErrorColor("text-red-500")
             setErrorMsg(error.response.data.message)
@@ -106,7 +107,7 @@ export default function ResetPassword() {
             case 2:
                 return (
                     <div className='flex flex-col w-[90%] md:w-[50%] lg:w-[25%] '>
-                        <p className='text-3xl font-bold text-gray-700'>Enter OTP</p>
+                        <p className='text-3xl font-bold text-gray-700'>Verify OTP</p>
                         <p className='text-base pb-5 text-gray-400'>Enter the OTP to verify your account. </p>
 
                         <InputField

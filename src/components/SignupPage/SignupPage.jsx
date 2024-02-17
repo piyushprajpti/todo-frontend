@@ -30,7 +30,7 @@ export default function SignupPage() {
             let result = await axios.post(url, data, {
                 headers: { "Content-Type": "application/json" }
             });
-
+            console.log(result)
             localStorage.setItem("userid", result.data._id);
 
             setErrorColor("text-green-500");
